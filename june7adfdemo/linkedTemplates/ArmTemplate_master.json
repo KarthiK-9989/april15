@@ -1,0 +1,334 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "june7adfdemo"
+		},
+		"Adls_Dynamic_LinkedService_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'Adls_Dynamic_LinkedService'"
+		},
+		"Source_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'Source'"
+		},
+		"adls_dynamic_source_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'adls_dynamic_source'"
+		},
+		"destination002_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'destination002'"
+		},
+		"destinationdb_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'destinationdb'"
+		},
+		"destinationdb01_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'destinationdb01'"
+		},
+		"destjune8_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'destjune8'"
+		},
+		"juen18_linked_service_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'juen18_linked_service'"
+		},
+		"june12_adf_linkedservice_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'june12_adf_linkedservice'"
+		},
+		"june20_dynamic_linkeddatset_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'june20_dynamic_linkeddatset'"
+		},
+		"source002_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'source002'"
+		},
+		"source01_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'source01'"
+		},
+		"sourceDB_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'sourceDB'"
+		},
+		"source_info_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'source_info'"
+		},
+		"Adls_Dynamic_LinkedService_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{concat(\n    'https://',\n    linkedService().storage_account_name,\n    '.dfs.core.windows.net'\n)\n}\n  "
+		},
+		"Source_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{concat(\n'https://',\nlinkedService().storageaccount,\n'.dfs.core.windows.net'\n)}"
+		},
+		"adls_dynamic_source_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{\n    concat(\n        'https://',\n        linkedService().storage_account_name,\n        '.dfs.core.windows.net'\n    )\n }   \n    \n"
+		},
+		"destination002_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://june4storageaccount.dfs.core.windows.net/"
+		},
+		"destinationdb_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "seekhobigdatajune07server.database.windows.net"
+		},
+		"destinationdb_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "seekhobigdatadb"
+		},
+		"destinationdb_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "karthikadmin"
+		},
+		"destinationdb01_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "seekhobigdatajune07server.database.windows.net"
+		},
+		"destinationdb01_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "seekhobigdatadb"
+		},
+		"destinationdb01_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "karthikadmin"
+		},
+		"destjune8_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{concat(\n'https://',\nlinkedService().storage_account_name,\n'.dfs.core.windows.net'\n\n)\n}"
+		},
+		"juen18_linked_service_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://june4storageaccount.dfs.core.windows.net/"
+		},
+		"june12_adf_linkedservice_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://june4storageaccount.dfs.core.windows.net/"
+		},
+		"june20_dynamic_linkeddatset_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://june4storageaccount.dfs.core.windows.net/"
+		},
+		"source002_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://june4storageaccount.dfs.core.windows.net/"
+		},
+		"source01_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "seekhoserver.database.windows.net"
+		},
+		"source01_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "seekhodb"
+		},
+		"source01_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sqladmin"
+		},
+		"sourceDB_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "seekhobigdatajune07server.database.windows.net"
+		},
+		"sourceDB_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "seekhobigdatadb"
+		},
+		"sourceDB_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "karthikadmin"
+		},
+		"source_info_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{\n    concat(\n        'https://',\n        linkedService().storage_account_name,\n        '.dfs.core.windows.net'\n    )\n}"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "june7adfdemo_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"Adls_Dynamic_LinkedService_accountKey": {
+						"value": "[parameters('Adls_Dynamic_LinkedService_accountKey')]"
+					},
+					"Source_accountKey": {
+						"value": "[parameters('Source_accountKey')]"
+					},
+					"adls_dynamic_source_accountKey": {
+						"value": "[parameters('adls_dynamic_source_accountKey')]"
+					},
+					"destination002_accountKey": {
+						"value": "[parameters('destination002_accountKey')]"
+					},
+					"destinationdb_password": {
+						"value": "[parameters('destinationdb_password')]"
+					},
+					"destinationdb01_password": {
+						"value": "[parameters('destinationdb01_password')]"
+					},
+					"destjune8_accountKey": {
+						"value": "[parameters('destjune8_accountKey')]"
+					},
+					"juen18_linked_service_accountKey": {
+						"value": "[parameters('juen18_linked_service_accountKey')]"
+					},
+					"june12_adf_linkedservice_accountKey": {
+						"value": "[parameters('june12_adf_linkedservice_accountKey')]"
+					},
+					"june20_dynamic_linkeddatset_accountKey": {
+						"value": "[parameters('june20_dynamic_linkeddatset_accountKey')]"
+					},
+					"source002_accountKey": {
+						"value": "[parameters('source002_accountKey')]"
+					},
+					"source01_password": {
+						"value": "[parameters('source01_password')]"
+					},
+					"sourceDB_password": {
+						"value": "[parameters('sourceDB_password')]"
+					},
+					"source_info_accountKey": {
+						"value": "[parameters('source_info_accountKey')]"
+					},
+					"Adls_Dynamic_LinkedService_properties_typeProperties_url": {
+						"value": "[parameters('Adls_Dynamic_LinkedService_properties_typeProperties_url')]"
+					},
+					"Source_properties_typeProperties_url": {
+						"value": "[parameters('Source_properties_typeProperties_url')]"
+					},
+					"adls_dynamic_source_properties_typeProperties_url": {
+						"value": "[parameters('adls_dynamic_source_properties_typeProperties_url')]"
+					},
+					"destination002_properties_typeProperties_url": {
+						"value": "[parameters('destination002_properties_typeProperties_url')]"
+					},
+					"destinationdb_properties_typeProperties_server": {
+						"value": "[parameters('destinationdb_properties_typeProperties_server')]"
+					},
+					"destinationdb_properties_typeProperties_database": {
+						"value": "[parameters('destinationdb_properties_typeProperties_database')]"
+					},
+					"destinationdb_properties_typeProperties_userName": {
+						"value": "[parameters('destinationdb_properties_typeProperties_userName')]"
+					},
+					"destinationdb01_properties_typeProperties_server": {
+						"value": "[parameters('destinationdb01_properties_typeProperties_server')]"
+					},
+					"destinationdb01_properties_typeProperties_database": {
+						"value": "[parameters('destinationdb01_properties_typeProperties_database')]"
+					},
+					"destinationdb01_properties_typeProperties_userName": {
+						"value": "[parameters('destinationdb01_properties_typeProperties_userName')]"
+					},
+					"destjune8_properties_typeProperties_url": {
+						"value": "[parameters('destjune8_properties_typeProperties_url')]"
+					},
+					"juen18_linked_service_properties_typeProperties_url": {
+						"value": "[parameters('juen18_linked_service_properties_typeProperties_url')]"
+					},
+					"june12_adf_linkedservice_properties_typeProperties_url": {
+						"value": "[parameters('june12_adf_linkedservice_properties_typeProperties_url')]"
+					},
+					"june20_dynamic_linkeddatset_properties_typeProperties_url": {
+						"value": "[parameters('june20_dynamic_linkeddatset_properties_typeProperties_url')]"
+					},
+					"source002_properties_typeProperties_url": {
+						"value": "[parameters('source002_properties_typeProperties_url')]"
+					},
+					"source01_properties_typeProperties_server": {
+						"value": "[parameters('source01_properties_typeProperties_server')]"
+					},
+					"source01_properties_typeProperties_database": {
+						"value": "[parameters('source01_properties_typeProperties_database')]"
+					},
+					"source01_properties_typeProperties_userName": {
+						"value": "[parameters('source01_properties_typeProperties_userName')]"
+					},
+					"sourceDB_properties_typeProperties_server": {
+						"value": "[parameters('sourceDB_properties_typeProperties_server')]"
+					},
+					"sourceDB_properties_typeProperties_database": {
+						"value": "[parameters('sourceDB_properties_typeProperties_database')]"
+					},
+					"sourceDB_properties_typeProperties_userName": {
+						"value": "[parameters('sourceDB_properties_typeProperties_userName')]"
+					},
+					"source_info_properties_typeProperties_url": {
+						"value": "[parameters('source_info_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "june7adfdemo_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'june7adfdemo_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "june7adfdemo_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'june7adfdemo_ArmTemplate_1')]"
+			]
+		}
+	]
+}

@@ -1,0 +1,657 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "june7adfdemo"
+		},
+		"Adls_Dynamic_LinkedService_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'Adls_Dynamic_LinkedService'"
+		},
+		"Source_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'Source'"
+		},
+		"adls_dynamic_source_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'adls_dynamic_source'"
+		},
+		"destination002_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'destination002'"
+		},
+		"destinationdb_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'destinationdb'"
+		},
+		"destinationdb01_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'destinationdb01'"
+		},
+		"destjune8_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'destjune8'"
+		},
+		"juen18_linked_service_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'juen18_linked_service'"
+		},
+		"june12_adf_linkedservice_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'june12_adf_linkedservice'"
+		},
+		"june20_dynamic_linkeddatset_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'june20_dynamic_linkeddatset'"
+		},
+		"source002_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'source002'"
+		},
+		"source01_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'source01'"
+		},
+		"sourceDB_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'sourceDB'"
+		},
+		"source_info_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'source_info'"
+		},
+		"Adls_Dynamic_LinkedService_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{concat(\n    'https://',\n    linkedService().storage_account_name,\n    '.dfs.core.windows.net'\n)\n}\n  "
+		},
+		"Source_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{concat(\n'https://',\nlinkedService().storageaccount,\n'.dfs.core.windows.net'\n)}"
+		},
+		"adls_dynamic_source_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{\n    concat(\n        'https://',\n        linkedService().storage_account_name,\n        '.dfs.core.windows.net'\n    )\n }   \n    \n"
+		},
+		"destination002_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://june4storageaccount.dfs.core.windows.net/"
+		},
+		"destinationdb_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "seekhobigdatajune07server.database.windows.net"
+		},
+		"destinationdb_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "seekhobigdatadb"
+		},
+		"destinationdb_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "karthikadmin"
+		},
+		"destinationdb01_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "seekhobigdatajune07server.database.windows.net"
+		},
+		"destinationdb01_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "seekhobigdatadb"
+		},
+		"destinationdb01_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "karthikadmin"
+		},
+		"destjune8_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{concat(\n'https://',\nlinkedService().storage_account_name,\n'.dfs.core.windows.net'\n\n)\n}"
+		},
+		"juen18_linked_service_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://june4storageaccount.dfs.core.windows.net/"
+		},
+		"june12_adf_linkedservice_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://june4storageaccount.dfs.core.windows.net/"
+		},
+		"june20_dynamic_linkeddatset_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://june4storageaccount.dfs.core.windows.net/"
+		},
+		"source002_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://june4storageaccount.dfs.core.windows.net/"
+		},
+		"source01_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "seekhoserver.database.windows.net"
+		},
+		"source01_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "seekhodb"
+		},
+		"source01_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sqladmin"
+		},
+		"sourceDB_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "seekhobigdatajune07server.database.windows.net"
+		},
+		"sourceDB_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "seekhobigdatadb"
+		},
+		"sourceDB_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "karthikadmin"
+		},
+		"source_info_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{\n    concat(\n        'https://',\n        linkedService().storage_account_name,\n        '.dfs.core.windows.net'\n    )\n}"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Adls_Dynamic_LinkedService')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"storage_account_name": {
+						"type": "string",
+						"defaultValue": "june4storageaccount"
+					}
+				},
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('Adls_Dynamic_LinkedService_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('Adls_Dynamic_LinkedService_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Source')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"storageaccount": {
+						"type": "string",
+						"defaultValue": "june4storageaccount"
+					}
+				},
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('Source_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('Source_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adls_dynamic_source')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"storage_account_name": {
+						"type": "string",
+						"defaultValue": "june4storageaccount"
+					}
+				},
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('adls_dynamic_source_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('adls_dynamic_source_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/destination002')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('destination002_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('destination002_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/destinationdb')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('destinationdb_properties_typeProperties_server')]",
+					"database": "[parameters('destinationdb_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('destinationdb_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('destinationdb_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/destinationdb01')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('destinationdb01_properties_typeProperties_server')]",
+					"database": "[parameters('destinationdb01_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('destinationdb01_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('destinationdb01_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/destjune8')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"storage_account_name": {
+						"type": "string",
+						"defaultValue": "june4storageaccount"
+					}
+				},
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('destjune8_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('destjune8_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/juen18_linked_service')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('juen18_linked_service_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('juen18_linked_service_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/june12_adf_linkedservice')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('june12_adf_linkedservice_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('june12_adf_linkedservice_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/june20_dynamic_linkeddatset')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('june20_dynamic_linkeddatset_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('june20_dynamic_linkeddatset_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/source002')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('source002_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('source002_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/source01')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('source01_properties_typeProperties_server')]",
+					"database": "[parameters('source01_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('source01_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('source01_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/sourceDB')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('sourceDB_properties_typeProperties_server')]",
+					"database": "[parameters('sourceDB_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('sourceDB_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('sourceDB_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/source_info')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"storage_account_name": {
+						"type": "string",
+						"defaultValue": "june4storageaccount"
+					}
+				},
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('source_info_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('source_info_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/27thjune_input_dataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "june20_dynamic_linkeddatset",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"foldername": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "input",
+						"fileSystem": "june20container"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/june20_dynamic_linkeddatset')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adls_gen2_dynamic_sink_dataser')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Adls_Dynamic_LinkedService",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"storage_account_name": "june4storageaccount"
+					}
+				},
+				"parameters": {
+					"sink_container_name": {
+						"type": "string"
+					},
+					"sink_folder_name": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": {
+							"value": "@dataset().sink_folder_name",
+							"type": "Expression"
+						},
+						"fileSystem": {
+							"value": "@dataset().sink_container_name",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Adls_Dynamic_LinkedService')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adls_gen2_dynamic_source_datset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Adls_Dynamic_LinkedService",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"storage_account_name": "june4storageaccount"
+					}
+				},
+				"parameters": {
+					"container_name": {
+						"type": "string"
+					},
+					"folder_name": {
+						"type": "string"
+					},
+					"file_name": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().file_name",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().folder_name",
+							"type": "Expression"
+						},
+						"fileSystem": {
+							"value": "@dataset().container_name",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Adls_Dynamic_LinkedService')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/destination')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "destinationdb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "seekhoschema",
+					"table": "edu"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/destinationdb')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/destinationdf1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "destination002",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "june8op",
+						"fileSystem": "input"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/destination002')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/destinonjune8')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "destjune8",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"storage_account_name": "june4storageaccount"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "output"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/destjune8')]"
+			]
+		}
+	]
+}

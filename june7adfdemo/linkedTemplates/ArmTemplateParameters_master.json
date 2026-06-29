@@ -1,0 +1,123 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "june7adfdemo"
+		},
+		"Adls_Dynamic_LinkedService_accountKey": {
+			"value": ""
+		},
+		"Source_accountKey": {
+			"value": ""
+		},
+		"adls_dynamic_source_accountKey": {
+			"value": ""
+		},
+		"destination002_accountKey": {
+			"value": ""
+		},
+		"destinationdb_password": {
+			"value": ""
+		},
+		"destinationdb01_password": {
+			"value": ""
+		},
+		"destjune8_accountKey": {
+			"value": ""
+		},
+		"juen18_linked_service_accountKey": {
+			"value": ""
+		},
+		"june12_adf_linkedservice_accountKey": {
+			"value": ""
+		},
+		"june20_dynamic_linkeddatset_accountKey": {
+			"value": ""
+		},
+		"source002_accountKey": {
+			"value": ""
+		},
+		"source01_password": {
+			"value": ""
+		},
+		"sourceDB_password": {
+			"value": ""
+		},
+		"source_info_accountKey": {
+			"value": ""
+		},
+		"Adls_Dynamic_LinkedService_properties_typeProperties_url": {
+			"value": "@{concat(\n    'https://',\n    linkedService().storage_account_name,\n    '.dfs.core.windows.net'\n)\n}\n  "
+		},
+		"Source_properties_typeProperties_url": {
+			"value": "@{concat(\n'https://',\nlinkedService().storageaccount,\n'.dfs.core.windows.net'\n)}"
+		},
+		"adls_dynamic_source_properties_typeProperties_url": {
+			"value": "@{\n    concat(\n        'https://',\n        linkedService().storage_account_name,\n        '.dfs.core.windows.net'\n    )\n }   \n    \n"
+		},
+		"destination002_properties_typeProperties_url": {
+			"value": "https://june4storageaccount.dfs.core.windows.net/"
+		},
+		"destinationdb_properties_typeProperties_server": {
+			"value": "seekhobigdatajune07server.database.windows.net"
+		},
+		"destinationdb_properties_typeProperties_database": {
+			"value": "seekhobigdatadb"
+		},
+		"destinationdb_properties_typeProperties_userName": {
+			"value": "karthikadmin"
+		},
+		"destinationdb01_properties_typeProperties_server": {
+			"value": "seekhobigdatajune07server.database.windows.net"
+		},
+		"destinationdb01_properties_typeProperties_database": {
+			"value": "seekhobigdatadb"
+		},
+		"destinationdb01_properties_typeProperties_userName": {
+			"value": "karthikadmin"
+		},
+		"destjune8_properties_typeProperties_url": {
+			"value": "@{concat(\n'https://',\nlinkedService().storage_account_name,\n'.dfs.core.windows.net'\n\n)\n}"
+		},
+		"juen18_linked_service_properties_typeProperties_url": {
+			"value": "https://june4storageaccount.dfs.core.windows.net/"
+		},
+		"june12_adf_linkedservice_properties_typeProperties_url": {
+			"value": "https://june4storageaccount.dfs.core.windows.net/"
+		},
+		"june20_dynamic_linkeddatset_properties_typeProperties_url": {
+			"value": "https://june4storageaccount.dfs.core.windows.net/"
+		},
+		"source002_properties_typeProperties_url": {
+			"value": "https://june4storageaccount.dfs.core.windows.net/"
+		},
+		"source01_properties_typeProperties_server": {
+			"value": "seekhoserver.database.windows.net"
+		},
+		"source01_properties_typeProperties_database": {
+			"value": "seekhodb"
+		},
+		"source01_properties_typeProperties_userName": {
+			"value": "sqladmin"
+		},
+		"sourceDB_properties_typeProperties_server": {
+			"value": "seekhobigdatajune07server.database.windows.net"
+		},
+		"sourceDB_properties_typeProperties_database": {
+			"value": "seekhobigdatadb"
+		},
+		"sourceDB_properties_typeProperties_userName": {
+			"value": "karthikadmin"
+		},
+		"source_info_properties_typeProperties_url": {
+			"value": "@{\n    concat(\n        'https://',\n        linkedService().storage_account_name,\n        '.dfs.core.windows.net'\n    )\n}"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
